@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
-$GRAALVM_HOME/bin/javac *.java 
-jar cfe runnable.jar Main *.class
-/home/matthias/Development/vt/quarkus/tools/graalvm-ce-19.2.1/bin/native-image -jar runnable.jar --no-fallback --features=UserFeature executable 
+mkdir -p target
+$GRAALVM_HOME/bin/javac -d target src/*.java 
+jar cfe target/runnable.jar Main -C target . 
+$GRAALVM_HOME/bin/native-image -jar target/runnable.jar --no-fallback --features=UserFeature target/executable 
