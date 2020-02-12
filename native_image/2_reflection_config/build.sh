@@ -1,3 +1,6 @@
-javac *.java
-jar cfe runnable.jar Main *.class
-/home/matthias/Development/vt/quarkus/tools/graalvm-ce-19.2.1/bin/native-image -jar runnable.jar --no-fallback -H:ReflectionConfigurationFiles=config.json executable
+#!/bin/bash
+
+mkdir -p target
+javac -d target src/*.java
+jar cfe target/runnable.jar Main -C target .
+$GRAALVM_HOME/bin/native-image -jar target/runnable.jar --no-fallback -H:ReflectionConfigurationFiles=src/config.json target/executable
