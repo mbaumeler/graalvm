@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 mkdir -p target
 javac -d target src/*.java
